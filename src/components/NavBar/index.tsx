@@ -56,15 +56,18 @@ const NavBar = () => {
                      procurando?
                   </span>
                </div>
-               <select className="select max-w-md bg-transparent select-accent">
-                  <option disabled selected>
+               <select
+                  defaultValue={3}
+                  className="select max-w-md bg-transparent select-accent"
+               >
+                  <option value={1} disabled>
                      Categoria
                   </option>
-                  <option>Irrigação</option>
-                  <option>Irrigação</option>
-                  <option>Irrigação</option>
-                  <option>Irrigação</option>
-                  <option>Irrigação</option>
+                  <option value={2}>Irrigação</option>
+                  <option value={3}>Irrigação</option>
+                  <option value={4}>Irrigação</option>
+                  <option value={5}>Irrigação</option>
+                  <option value={6}>Irrigação</option>
                </select>
 
                <input
