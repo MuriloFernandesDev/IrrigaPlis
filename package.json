@@ -20,7 +20,8 @@
       "react-daisyui": "^2.3.2",
       "react-dom": "18.2.0",
       "react-hook-form": "^7.36.0",
-      "react-modern-drawer": "^1.1.2"
+      "react-modern-drawer": "^1.1.2",
+      "sass": "^1.55.0"
    },
    "devDependencies": {
       "@types/node": "^18.11.5",

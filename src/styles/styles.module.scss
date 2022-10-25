@@ -1,0 +1,78 @@
+.collapse {
+   visibility: visible;
+}
+.collapse.collapse {
+   visibility: visible;
+}
+.collapse.collapse {
+   visibility: visible;
+}
+.collapse {
+   position: relative;
+   display: grid;
+   overflow: hidden;
+}
+.collapse-title,
+.collapse > input[type='checkbox'],
+.collapse-content {
+   grid-column-start: 1;
+   grid-row-start: 1;
+}
+.collapse > input[type='checkbox'] {
+   appearance: none;
+   opacity: 0;
+}
+.collapse-open .collapse-content,
+.collapse:focus:not(.collapse-close) .collapse-content,
+.collapse:not(.collapse-close)
+   input[type='checkbox']:checked
+   ~ .collapse-content {
+   max-height: 9000px;
+}
+.collapse-open .collapse-content,
+.collapse:focus:not(.collapse-close) .collapse-content,
+.collapse:not(.collapse-close)
+   input[type='checkbox']:checked
+   ~ .collapse-content {
+   max-height: 9000px;
+}
+.collapse:focus-visible {
+   outline: 2px solid hsl(var(--nf));
+   outline-offset: 2px;
+}
+.collapse:not(.collapse-open):not(.collapse-close) input[type='checkbox'],
+.collapse:not(.collapse-open):not(.collapse-close) .collapse-title {
+   cursor: pointer;
+}
+.collapse:not(.collapse-open):not(.collapse-close) input[type='checkbox'],
+.collapse:not(.collapse-open):not(.collapse-close) .collapse-title {
+   cursor: pointer;
+}
+.collapse:focus:not(.collapse-open):not(.collapse-close) .collapse-title {
+   cursor: unset;
+}
+:where(.collapse > input[type='checkbox']) {
+   z-index: 1;
+}
+.collapse-title,
+:where(.collapse > input[type='checkbox']) {
+   width: 100%;
+   padding: 1rem /* 16px */;
+   padding-right: 3rem /* 48px */;
+   min-height: 3.75rem /* 60px */;
+   transition: background-color 0.2s ease-in-out;
+}
+.collapse-open :where(.collapse-content),
+.collapse:focus:not(.collapse-close) :where(.collapse-content),
+.collapse:not(.collapse-close)
+   :where(input[type='checkbox']:checked ~ .collapse-content) {
+   padding-bottom: 1rem /* 16px */;
+   transition: padding 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+.collapse-open :where(.collapse-content),
+.collapse:focus:not(.collapse-close) :where(.collapse-content),
+.collapse:not(.collapse-close)
+   :where(input[type='checkbox']:checked ~ .collapse-content) {
+   padding-bottom: 1rem /* 16px */;
+   transition: padding 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}

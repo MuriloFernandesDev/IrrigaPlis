@@ -3,32 +3,51 @@ import LogoImg from '../../assets/images/logo.webp'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import Link from 'next/link'
 
 const NavBar = () => {
    return (
       <>
          <div className="navbar bg-base-100 p-0 min-h-max shadow-sm">
-            <div className="w-full max-w-7xl mx-auto">
-               <div className="navbar-start">
-                  <Image src={LogoImg} width={126} height={37} layout="fixed" />
+            <div className="w-full max-w-[1600px] mx-auto">
+               <div className="navbar-start pl-4">
+                  <Link href={'/'} passHref>
+                     <Image
+                        src={LogoImg}
+                        width={126}
+                        height={37}
+                        layout="fixed"
+                        className="cursor-pointer"
+                     />
+                  </Link>
                </div>
                <div className="navbar-center hidden lg:flex">
                   <ul className="menu menu-horizontal p-0">
                      <li>
-                        <a>Empresa</a>
+                        <Link href={'/business'} passHref>
+                           <a>Empresa</a>
+                        </Link>
                      </li>
                      <li>
-                        <a>Produtos</a>
+                        <Link href={'/products'} passHref>
+                           <a>Produtos</a>
+                        </Link>
                      </li>
 
                      <li>
-                        <a>Serviços</a>
+                        <Link href={'/services'} passHref>
+                           <a>Serviços</a>
+                        </Link>
                      </li>
                      <li>
-                        <a>Atendimento</a>
+                        <Link href={'/treatment'} passHref>
+                           <a>Atendimento</a>
+                        </Link>
                      </li>
                      <li>
-                        <a>Trabalhe conosco</a>
+                        <Link href={'/work-with-us'} passHref>
+                           <a>Trabalhe conosco</a>
+                        </Link>
                      </li>
                   </ul>
                </div>
