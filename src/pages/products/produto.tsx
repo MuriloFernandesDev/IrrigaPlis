@@ -4,8 +4,22 @@ import Image from 'next/image'
 import Banner from '../../components/Banner'
 import ProductCard from '../../components/ProductCard'
 import TuboImg from '../../assets/images/tuboaco.png'
+import { useCart } from '../../hooks/useCart'
+import { useState } from 'react'
 
 function Produtos() {
+   const { addProduct } = useCart()
+   const [amount, setAmount] = useState(1)
+   function handleAddProduct(
+      id: number,
+      price: number,
+      image: string,
+      title: string,
+      amount: number
+   ) {
+      addProduct(id, price, image, title, amount)
+   }
+
    return (
       <div>
          <Banner title="tubos" />
@@ -42,7 +56,7 @@ function Produtos() {
                         <p>Tamanho</p>
                         <select
                            defaultValue={3}
-                           className="select max-w-md bg-transparent select-accent"
+                           className="select  max-w-md bg-transparent select-accent"
                         >
                            <option value={1}>192mm</option>
                            <option value={2}>192mm</option>
@@ -55,11 +69,25 @@ function Produtos() {
                      <div className="flex flex-col gap-3">
                         <p>Quantidade</p>
                         <div className="flex justify-between items-center border-accent border rounded-md p-2 ">
-                           <button className="btn btn-circle bg-transparent text-black border-accent min-h-0 h-7 w-7">
+                           <button
+                              onClick={() =>
+                                 setAmount(() => (amount > 1 ? amount - 1 : 1))
+                              }
+                              className="btn btn-circle bg-transparent text-black border-accent min-h-0 h-7 w-7"
+                           >
                               -
                            </button>
-                           <span>1</span>
-                           <button className="btn btn-circle bg-transparent text-black border-accent min-h-0 h-7 w-7">
+                           <input
+                              className="p-2 active:border-transparent w-16 text-center m-1"
+                              onChange={(e) =>
+                                 setAmount(Number(e.target.value))
+                              }
+                              value={amount}
+                           ></input>
+                           <button
+                              onClick={() => setAmount(amount + 1)}
+                              className="btn btn-circle bg-transparent text-black border-accent min-h-0 h-7 w-7"
+                           >
                               +
                            </button>
                         </div>
@@ -73,7 +101,18 @@ function Produtos() {
                      <button className="btn bg-[#008C4F] border-transparent text-base-100 w-full">
                         Solicitar orçamento
                      </button>
-                     <button className="btn bg-[#008c4f41] border-transparent text-[#008C4F] w-full">
+                     <button
+                        onClick={() =>
+                           handleAddProduct(
+                              1,
+                              1000,
+                              'https://irriga-plis.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftuboaco.d3bdb50d.png&w=256&q=75',
+                              'Tubo de aço zincado - IP-20',
+                              amount
+                           )
+                        }
+                        className="btn bg-[#008c4f41] border-transparent text-[#008C4F] w-full"
+                     >
                         Adicionar ao carrinho
                      </button>
                   </div>

@@ -8,10 +8,12 @@ import { useState } from 'react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { useRouter } from 'next/router'
+import { useCart } from '../../hooks/useCart'
 
 const NavBar = () => {
    const router = useRouter()
    const [openDrawer, setOpenDrawer] = useState(false)
+   const { cartSize } = useCart()
 
    const toggleDrawer = () => {
       setOpenDrawer((prevState) => !prevState)
@@ -62,7 +64,7 @@ const NavBar = () => {
                      </ul>
                   </div>
                   <div className="navbar-end flex">
-                     <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-primary text-base-100">
+                     <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success text-base-100">
                         <FontAwesomeIcon
                            icon={faFacebook}
                            className="w-4 h-4"
@@ -71,12 +73,23 @@ const NavBar = () => {
                            Social
                         </p>
                      </button>
-                     <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-error text-base-100">
-                        <FontAwesomeIcon
-                           icon={faCartShopping}
-                           className="w-4 h-4"
-                        />
-                     </button>
+                     <Link href={'/cart'}>
+                        <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-error text-base-100">
+                           <FontAwesomeIcon
+                              icon={faCartShopping}
+                              className="w-4 h-4 relative"
+                           />
+                           {cartSize && cartSize > 0 ? (
+                              <div className="absolute">
+                                 <span className="flex h-4 w-4 relative -mt-[2.04rem] ml-7">
+                                    <span className="relative text-xs rounded-full h-4 w-4 bg-primary animate-bounce ">
+                                       {cartSize}
+                                    </span>
+                                 </span>
+                              </div>
+                           ) : null}
+                        </button>
+                     </Link>
                      <button className="block md:hidden" onClick={toggleDrawer}>
                         <svg
                            className={'swap-off fill-current '}
@@ -120,7 +133,7 @@ const NavBar = () => {
                      placeholder="Digite aqui"
                      className="w-full input bg-transparent input-accent"
                   />
-                  <button className="btn btn-primary">Buscar</button>
+                  <button className="btn btn-success text-white">Buscar</button>
                </div>
             </div>
          </div>
