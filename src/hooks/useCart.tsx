@@ -108,7 +108,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
          // Verificando a quantidade inserida no carrinho
          const currentAmount = productExists ? productExists.amount : 0
          // Adicionando mais um item
-         const newAmount = currentAmount + 1
+         const newAmount = currentAmount + amount
 
          //verificando se o produto existe no carrinho
          if (productExists) {
