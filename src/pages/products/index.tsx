@@ -7,7 +7,7 @@ function Products() {
    return (
       <div>
          <Banner title="nossos produtos" />
-         <div className="my-16">
+         <div className="my-16 px-4">
             <div className="max-w-7xl mx-auto mt-16">
                <div className="flex gap-3 items-center mb-8">
                   <h1 className="text-2xl font-medium text-primary">Tubos</h1>
@@ -19,7 +19,7 @@ function Products() {
                      />
                   </span>
                </div>
-               <div className="grid grid-cols-4 gap-4">
+               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <ProductCard />
                   <ProductCard />
                   <ProductCard />
@@ -39,7 +39,7 @@ function Products() {
                      />
                   </span>
                </div>
-               <div className="grid grid-cols-4 gap-4">
+               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <ProductCard />
                   <ProductCard />
                   <ProductCard />
@@ -59,7 +59,7 @@ function Products() {
                      />
                   </span>
                </div>
-               <div className="grid grid-cols-4 gap-4">
+               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <ProductCard />
                   <ProductCard />
                   <ProductCard />

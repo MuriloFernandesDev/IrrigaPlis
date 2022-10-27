@@ -10,8 +10,8 @@ function Business() {
    return (
       <div>
          <Banner title="A irrigação penápolis" />
-         <div className="my-16">
-            <div className="max-w-7xl mx-auto px-4">
+         <div className="my-16 px-4">
+            <div className="max-w-7xl mx-auto">
                <div className="w-full flex justify-center md:justify-start my-11">
                   <div className="flex flex-col items-center">
                      <div className="flex gap-3 items-center">
@@ -19,7 +19,7 @@ function Business() {
                            icon={faBuilding}
                            className="w-9 h-9 text-error"
                         />
-                        <h1 className="text-primary text-5xl font-bold uppercase">
+                        <h1 className="text-primary text-4xl md:text-5xl font-bold uppercase">
                            Quem somos
                         </h1>
                      </div>
@@ -57,23 +57,23 @@ function Business() {
                   </div>
                </div>
             </div>
-            <div className="max-w-7xl mx-auto px-4 mt-28">
-               <div className="flex gap-3 items-center">
+            <div className="max-w-7xl mx-auto mt-28">
+               <div className="flex items-center w-full justify-center">
                   <FontAwesomeIcon
                      icon={faYoutube}
                      className="w-14 h-9 text-red-800"
                   />
-                  <h1 className="text-primary text-5xl font-bold uppercase">
+                  <span className="text-primary text-2xl md:text-5xl font-bold uppercase">
                      Estamos no youtube!
-                  </h1>
+                  </span>
                </div>
-               <div className="grid grid-cols-3 gap-7 mt-14">
-                  <FrameYt video="https://www.youtube.com/embed/fFsprYx1xWg" />
-                  <FrameYt video="https://www.youtube.com/embed/fFsprYx1xWg" />
-                  <FrameYt video="https://www.youtube.com/embed/fFsprYx1xWg" />
-                  <FrameYt video="https://www.youtube.com/embed/fFsprYx1xWg" />
-                  <FrameYt video="https://www.youtube.com/embed/fFsprYx1xWg" />
-                  <FrameYt video="https://www.youtube.com/embed/fFsprYx1xWg" />
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-7 mt-14">
+                  <FrameYt video="https://www.youtube.com/embed/ru98mjyRIW4" />
+                  <FrameYt video="https://www.youtube.com/embed/ru98mjyRIW4" />
+                  <FrameYt video="https://www.youtube.com/embed/ru98mjyRIW4" />
+                  <FrameYt video="https://www.youtube.com/embed/ru98mjyRIW4" />
+                  <FrameYt video="https://www.youtube.com/embed/ru98mjyRIW4" />
+                  <FrameYt video="https://www.youtube.com/embed/ru98mjyRIW4" />
                </div>
             </div>
          </div>

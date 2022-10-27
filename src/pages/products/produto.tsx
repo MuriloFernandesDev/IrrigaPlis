@@ -9,8 +9,8 @@ function Produtos() {
    return (
       <div>
          <Banner title="tubos" />
-         <div className="my-16">
-            <div className="card flex-row max-w-5xl mx-auto">
+         <div className="my-16 px-4">
+            <div className="card flex-col-reverse md:flex-row max-w-5xl mx-auto">
                <div className="card-body justify-center items-center">
                   <Image
                      src={TuboImg}
@@ -79,7 +79,7 @@ function Produtos() {
                   </div>
                </div>
             </div>
-            <div className="max-w-7xl mx-auto mt-16">
+            <div className="max-w-7xl mx-auto md:mt-16">
                <div className="flex gap-3 items-center mb-8">
                   <h1 className="text-2xl font-medium text-primary">
                      Veja também
@@ -91,7 +91,7 @@ function Produtos() {
                      />
                   </span>
                </div>
-               <div className="grid grid-cols-4 gap-4">
+               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <ProductCard />
                   <ProductCard />
                   <ProductCard />

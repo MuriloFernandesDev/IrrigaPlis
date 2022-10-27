@@ -11,7 +11,7 @@ const Banner = ({
    return (
       <div className={`bg-cover bg-no-repeat ${image} max-w-[1600px] mx-auto`}>
          <div className="flex justify-center py-16">
-            <div className="flex flex-col gap-8 items-center">
+            <div className="flex flex-col gap-8 items-center text-center md:text-start">
                <h1 className="text-5xl text-base-100 font-bold uppercase">
                   {title}
                </h1>
