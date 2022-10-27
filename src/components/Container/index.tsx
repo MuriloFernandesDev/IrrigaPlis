@@ -10,7 +10,7 @@ const Container = ({ children }: ContainerProps) => {
    return (
       <React.Fragment>
          <NavBar />
-         <div className="pt-[117px]">{children}</div>
+         <div className="pt-[140px] md:pt-[117px]">{children}</div>
          <Footer />
       </React.Fragment>
    )

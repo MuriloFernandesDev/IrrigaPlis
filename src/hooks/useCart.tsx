@@ -7,7 +7,6 @@ import {
    useState,
 } from 'react'
 import { toast } from 'react-toastify'
-// import { api } from '../services/api'
 import { Product } from '../types/types'
 import { getAccessToken } from '../utils/localStorage'
 
@@ -118,6 +117,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
             //se nao, adiciona ao carrinho
             const newProduct = { id, price, image, title, amount: amount }
             updatedCart.push(newProduct)
+            toast.success(`${title} adicionado ao carrinho`)
          }
          //Atualizando o Carrinho
 

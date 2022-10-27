@@ -105,8 +105,16 @@ const NavBar = () => {
                </div>
             </div>
             <div className="bg-[#F2F2F2]">
+               <div className="uppercase flex md:hidden gap-2 justify-center pt-2">
+                  <span className="text-black text-xs font-medium">
+                     O que está
+                  </span>
+                  <span className="text-[#969696] text-xs font-bold">
+                     procurando?
+                  </span>
+               </div>
                <div className="flex items-center max-w-4xl mx-auto p-2 gap-3 w-full justify-around">
-                  <div className="flex flex-col uppercase">
+                  <div className=" flex-col uppercase hidden md:flex">
                      <span className="text-black text-xs font-medium">
                         O que está
                      </span>

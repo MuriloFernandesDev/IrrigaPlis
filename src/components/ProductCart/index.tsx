@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import { useCart } from '../../hooks/useCart'
 import { Product } from '../../types/types'
+import { formatPrice } from '../../utils/format'
 
 const ProductCart = ({ product }: any) => {
    const { removeProduct, updateProductAmount } = useCart()
@@ -34,7 +35,7 @@ const ProductCart = ({ product }: any) => {
          <div className="flex flex-col items-center justify-center">
             <div className="flex flex-col">
                <p className="text-lg text-primary">
-                  R$ {product.price * product.amount}
+                  {formatPrice(product.price * product.amount)}
                </p>
             </div>
             <div className="flex items-center justify-center">

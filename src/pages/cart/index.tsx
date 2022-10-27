@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import ProductCart from '../../components/ProductCart'
 import { useCart } from '../../hooks/useCart'
+import { formatPrice } from '../../utils/format'
 
 const Cart = (): JSX.Element => {
    const { cart, somaTotal, cartSize } = useCart()
@@ -33,12 +34,12 @@ const Cart = (): JSX.Element => {
                            ? cartSize + ' Produto'
                            : 'Carrinho está vazio'}
                      </span>
-                     <span>{somaTotal}</span>
+                     <span>{formatPrice(somaTotal)}</span>
                   </div>
                   <div className="divider m-0" />
                   <div className="flex justify-between">
                      <span className="font-thin text-lg">Total</span>
-                     <span>{somaTotal}</span>
+                     <span>{formatPrice(somaTotal)}</span>
                   </div>
                   <div className="flex flex-col md:flex-row justify-between gap-3">
                      <button className="btn btn-ghost">
