@@ -56,7 +56,7 @@ function Produtos() {
                         <p>Tamanho</p>
                         <select
                            defaultValue={3}
-                           className="select  max-w-md bg-transparent select-accent"
+                           className="select min-h-16 max-w-md bg-transparent select-accent"
                         >
                            <option value={1}>192mm</option>
                            <option value={2}>192mm</option>
@@ -68,12 +68,17 @@ function Produtos() {
                      </div>
                      <div className="flex flex-col gap-3">
                         <p>Quantidade</p>
-                        <div className="flex justify-between items-center border-accent border rounded-md p-2 ">
+                        <div className="flex justify-between items-center border-accent border rounded-md px-2 min-h-16 max-h-16">
                            <button
                               onClick={() =>
                                  setAmount(() => (amount > 1 ? amount - 1 : 1))
                               }
-                              className="btn btn-circle bg-transparent text-black border-accent min-h-0 h-7 w-7"
+                              className={
+                                 'btn btn-circle  text-black border-accent min-h-0 h-7 w-7 ' +
+                                 (amount < 2
+                                    ? 'btn-disabled bg-red-400/40'
+                                    : 'bg-transparent')
+                              }
                            >
                               -
                            </button>
@@ -111,7 +116,7 @@ function Produtos() {
                               amount
                            )
                         }
-                        className="btn bg-[#008c4f41] border-transparent text-[#008C4F] w-full"
+                        className="btn btn-success border-transparent text-base-100 w-full"
                      >
                         Adicionar ao carrinho
                      </button>

@@ -64,7 +64,7 @@ const NavBar = () => {
                      </ul>
                   </div>
                   <div className="navbar-end flex">
-                     <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success text-base-100">
+                     <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-blue-400 text-base-100">
                         <FontAwesomeIcon
                            icon={faFacebook}
                            className="w-4 h-4"
@@ -74,7 +74,7 @@ const NavBar = () => {
                         </p>
                      </button>
                      <Link href={'/cart'}>
-                        <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-error text-base-100">
+                        <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success text-base-100">
                            <FontAwesomeIcon
                               icon={faCartShopping}
                               className="w-4 h-4 relative"

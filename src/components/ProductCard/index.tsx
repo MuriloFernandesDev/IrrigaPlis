@@ -16,7 +16,7 @@ const ProductCard = () => {
             <div className="card-actions justify-start">
                <button
                   onClick={() => router.push('/products/produto')}
-                  className="btn btn-error text-base-100"
+                  className="btn btn-success text-base-100"
                >
                   Detalhes
                </button>
