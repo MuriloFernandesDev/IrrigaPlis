@@ -2,7 +2,7 @@ import Image from 'next/image'
 import LogoImg from '../../assets/images/logo.webp'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import { useState } from 'react'
 import Drawer from 'react-modern-drawer'
@@ -36,44 +36,35 @@ const NavBar = () => {
                   <div className="navbar-center hidden lg:flex">
                      <ul className="menu menu-horizontal p-0">
                         <li>
-                           <Link href={'/business'} passHref>
+                           <Link href={'/sobre-a-empresa'} passHref>
                               <a>Empresa</a>
                            </Link>
                         </li>
                         <li>
-                           <Link href={'/products'} passHref>
+                           <Link href={'/produtos'} passHref>
                               <a>Produtos</a>
                            </Link>
                         </li>
 
                         <li>
-                           <Link href={'/services'} passHref>
+                           <Link href={'/nossos-servicos'} passHref>
                               <a>Serviços</a>
                            </Link>
                         </li>
                         <li>
-                           <Link href={'/treatment'} passHref>
+                           <Link href={'/atendimento'} passHref>
                               <a>Atendimento</a>
                            </Link>
                         </li>
                         <li>
-                           <Link href={'/work-with-us'} passHref>
+                           <Link href={'/trabalhe-conosco'} passHref>
                               <a>Trabalhe conosco</a>
                            </Link>
                         </li>
                      </ul>
                   </div>
                   <div className="navbar-end flex">
-                     <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-blue-400 text-base-100">
-                        <FontAwesomeIcon
-                           icon={faFacebook}
-                           className="w-4 h-4"
-                        />
-                        <p className="text-[10px] font-medium hidden md:block">
-                           Social
-                        </p>
-                     </button>
-                     <Link href={'/cart'}>
+                     <Link href={'/carrinho'}>
                         <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success text-base-100">
                            <FontAwesomeIcon
                               icon={faCartShopping}
@@ -88,6 +79,24 @@ const NavBar = () => {
                                  </span>
                               </div>
                            ) : null}
+                        </button>
+                     </Link>
+                     <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-blue-400 text-base-100">
+                        <FontAwesomeIcon
+                           icon={faFacebook}
+                           className="w-4 h-4"
+                        />
+                        <p className="text-[10px] font-medium hidden md:block">
+                           Social
+                        </p>
+                     </button>
+
+                     <Link href={'/cliente/login'}>
+                        <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success text-base-100">
+                           <FontAwesomeIcon
+                              icon={faUser}
+                              className="w-4 h-4 relative"
+                           />
                         </button>
                      </Link>
                      <button className="block md:hidden" onClick={toggleDrawer}>
@@ -159,28 +168,28 @@ const NavBar = () => {
                   </Link>
                </li>
                <li onClick={toggleDrawer}>
-                  <Link href={'/business'} passHref>
+                  <Link href={'/sobre-a-empresa'} passHref>
                      <a>Empresa</a>
                   </Link>
                </li>
                <li onClick={toggleDrawer}>
-                  <Link href={'/products'} passHref>
+                  <Link href={'/produtos'} passHref>
                      <a>Produtos</a>
                   </Link>
                </li>
 
                <li onClick={toggleDrawer}>
-                  <Link href={'/services'} passHref>
+                  <Link href={'/nossos-servicos'} passHref>
                      <a>Serviços</a>
                   </Link>
                </li>
                <li onClick={toggleDrawer}>
-                  <Link href={'/treatment'} passHref>
+                  <Link href={'/atendimento'} passHref>
                      <a>Atendimento</a>
                   </Link>
                </li>
                <li onClick={toggleDrawer}>
-                  <Link href={'/work-with-us'} passHref>
+                  <Link href={'/trabalhe-conosco'} passHref>
                      <a>Trabalhe conosco</a>
                   </Link>
                </li>

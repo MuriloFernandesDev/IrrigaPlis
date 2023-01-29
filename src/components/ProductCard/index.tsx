@@ -15,7 +15,7 @@ const ProductCard = () => {
             <p className="text-sm font-normal">Tamanhos variados</p>
             <div className="card-actions justify-start">
                <button
-                  onClick={() => router.push('/products/produto')}
+                  onClick={() => router.push('/produtos/produto')}
                   className="btn btn-success text-base-100"
                >
                   Detalhes

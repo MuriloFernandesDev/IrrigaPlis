@@ -59,7 +59,7 @@ const Cart = (): JSX.Element => {
                />
                <h1 className="text-2xl font-bold">Carrinho vazio!</h1>
                <span>Você ainda não possui itens no seu carrinho.</span>
-               <Link href="/products">
+               <Link href="/produtos">
                   <button className="btn btn-success text-white">
                      Ver produtos
                   </button>

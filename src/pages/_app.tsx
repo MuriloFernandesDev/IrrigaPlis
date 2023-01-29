@@ -1,21 +1,41 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { Theme } from 'react-daisyui'
-import Container from '../components/Container'
 import { CartProvider } from '../hooks/useCart'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import NavBar from '../components/NavBar'
+import Footer from '../components/Footer'
+import { useRouter } from 'next/router'
+import React from 'react'
+import { AuthProvider } from '../hooks/AuthContext'
+import AuthComponent from '../components/AuthComponent'
 
 function MyApp({ Component, pageProps }: AppProps) {
+   const router = useRouter()
    return (
-      <Theme dataTheme="light">
-         <CartProvider>
-            <ToastContainer />
-            <Container>
-               <Component {...pageProps} />
-            </Container>
-         </CartProvider>
-      </Theme>
+      <AuthProvider>
+         <Theme dataTheme="light">
+            <CartProvider>
+               <ToastContainer />
+               {router.route === '/cliente/login' ||
+               router.route === '/cliente/cadastro' ||
+               router.route === '/cliente/recuperar-senha' ? (
+                  <AuthComponent>
+                     <Component {...pageProps} />
+                  </AuthComponent>
+               ) : (
+                  <React.Fragment>
+                     <NavBar />
+                     <div className="pt-[140px] md:pt-[117px]">
+                        <Component {...pageProps} />
+                     </div>
+                     <Footer />
+                  </React.Fragment>
+               )}
+            </CartProvider>
+         </Theme>
+      </AuthProvider>
    )
 }
 
