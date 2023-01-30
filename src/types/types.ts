@@ -45,6 +45,15 @@ export interface ICategories {
    slug: string
    name: string
    id: number
+   products: [
+        {
+            id: number
+            name: string
+            description: string
+            image_url: string
+            media: []
+        }
+    ]
 }
 
 export interface IProducts {

@@ -65,7 +65,7 @@ function Treatment() {
                            className="h-14 w-14 text-error"
                         />
                         <div className="card-title">
-                           <h1>falar pelo whatsapp</h1>
+                           <h1>Falar pelo WhatsApp</h1>
                         </div>
                      </div>
                   </div>
