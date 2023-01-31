@@ -14,10 +14,11 @@ export const UniqueName = (props: any) => {
    }
 }
 
-const FirstUpper = (str: any) => {
+export const FirstUpper = (str: any) => {
    if (typeof str !== 'string') {
       return ''
    }
+
    return str.charAt(0).toUpperCase() + str.substring(1)
 }
 

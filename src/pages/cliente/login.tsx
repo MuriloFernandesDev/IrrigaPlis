@@ -89,6 +89,11 @@ function Login() {
                         Cadastre-se
                      </a>
                   </Link>
+                  <Link href={'/'} passHref>
+                     <a className="link text-blue-600 cursor-pointer">
+                        Voltar para o início
+                     </a>
+                  </Link>
                </div>
             </form>
          </div>

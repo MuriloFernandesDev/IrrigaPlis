@@ -9,6 +9,7 @@ import { ICategories2, IProduct } from '../../types/types'
 import DefaultImg from '../../assets/images/default.png'
 import { GetServerSidePropsContext } from 'next'
 import ProductCard from '../../components/ProductCard'
+import { FirstUpper } from '../../utils/masks'
 
 interface ProductsProps {
    product: IProduct
@@ -64,7 +65,14 @@ function Produtos({ product, category }: ProductsProps) {
                            <li>
                               <a>Categoria</a>
                            </li>
-                           <li>Tubos</li>
+                           <li>
+                              {FirstUpper(
+                                 category.data[0].name
+                                    .substring(0, 11)
+                                    .toLowerCase()
+                              )}
+                              ...
+                           </li>
                         </ul>
                      </div>
                      <h1 className="text-3xl font-medium text-black">

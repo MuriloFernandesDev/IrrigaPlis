@@ -99,7 +99,7 @@ function Registro() {
 
    return (
       <>
-         <div className="text-2xl flex md:gap-1 flex-col md:flex-row text-center justify-center pt-4 text-default font-medium">
+         <div className="text-2xl flex md:gap-1 flex-col md:flex-row text-center justify-center pt-4 font-medium">
             <span>Cadastre-se</span>
          </div>
          <div className="w-full">
@@ -143,21 +143,26 @@ function Registro() {
                   label="Confirmação de senha"
                   error={errors.confirm_password}
                />
-               <div className="flex justify-end w-full">
+               <div className="flex flex-col items-center md:items-start w-full">
                   <Link href={'/cliente/recuperar-senha'} passHref>
                      <a className="text-xs  text-blue-600 link cursor-pointer">
                         Esqueceu sua senha?
                      </a>
                   </Link>
+                  <Link href={'/cliente/login'} passHref>
+                     <a className="text-xs  text-blue-600 link cursor-pointer">
+                        Ir para o login
+                     </a>
+                  </Link>
                </div>
                <div className="mt-4">
                   {formState.isSubmitting ? (
-                     <button className="btn btn-success loading text-white upper-case py-4 flex justify-center w-full shadow-md border-0">
+                     <button className="btn btn-success loading upper-case py-4 flex justify-center w-full shadow-md border-0">
                         Carregando
                      </button>
                   ) : (
                      <button
-                        className="btn btn-success upper-case text-white py-4 flex justify-center w-full shadow-md border-0"
+                        className="btn btn-success upper-case py-4 flex justify-center w-full shadow-md border-0"
                         type="submit"
                      >
                         Cadastrar

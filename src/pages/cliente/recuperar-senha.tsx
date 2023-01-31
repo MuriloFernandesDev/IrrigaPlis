@@ -2,6 +2,7 @@ import { Input } from '../../components/InputElement'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import * as yup from 'yup'
+import Link from 'next/link'
 
 type ForgoutFormData = {
    email: string
@@ -43,6 +44,14 @@ function RecuperarSenha() {
                label="Email"
                error={errors.email}
             />
+
+            <div className="flex flex-col items-center md:items-start w-full">
+               <Link href={'/cliente/login'} passHref>
+                  <a className="text-xs  text-blue-600 link cursor-pointer">
+                     Ir para o login
+                  </a>
+               </Link>
+            </div>
 
             {formState.isSubmitting ? (
                <button className="btn btn-success text-white loading normal-case py-4 flex justify-center w-full shadow-md border-0">
