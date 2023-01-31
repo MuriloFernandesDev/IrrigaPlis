@@ -45,12 +45,12 @@ function RecuperarSenha() {
             />
 
             {formState.isSubmitting ? (
-               <button className="btn btn-info text-white loading normal-case py-4 flex justify-center w-full shadow-md border-0">
+               <button className="btn btn-success text-white loading normal-case py-4 flex justify-center w-full shadow-md border-0">
                   Carregando
                </button>
             ) : (
                <button
-                  className="btn btn-info text-white normal-case py-4 flex justify-center w-full shadow-md border-0"
+                  className="btn btn-success text-white normal-case py-4 flex justify-center w-full shadow-md border-0"
                   type="submit"
                >
                   Redefinir senha

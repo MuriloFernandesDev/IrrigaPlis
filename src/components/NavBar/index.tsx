@@ -5,6 +5,7 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import {
    faCartShopping,
    faCircleUser,
+   faRightFromBracket,
    faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
@@ -113,25 +114,17 @@ const NavBar = () => {
                            </label>
                            <ul
                               tabIndex={0}
-                              className="menu menu-compact dropdown-content mt-3 p-2 bg-base-200 rounded-box w-52 shadow-2xl"
+                              className="dropdown-content p-2 bg-base-100 w-40 shadow-2xl"
                            >
                               <li>
-                                 <a>Meus Dados</a>
+                                 <button
+                                    className="text-left w-full"
+                                    type="submit"
+                                    onClick={signOut}
+                                 >
+                                    Sair
+                                 </button>
                               </li>
-                              <li>
-                                 <a>Meus pedidos</a>
-                              </li>
-                              {user && (
-                                 <li>
-                                    <button
-                                       className="text-left w-full"
-                                       type="submit"
-                                       onClick={signOut}
-                                    >
-                                       Sair
-                                    </button>
-                                 </li>
-                              )}
                            </ul>
                         </div>
                      ) : (
@@ -207,6 +200,27 @@ const NavBar = () => {
             className="w-2/3"
          >
             <ul className="menu">
+               {user ? (
+                  <button className="flex items-center gap-3 p-2 px-4 bg-success text-base-100">
+                     <FontAwesomeIcon
+                        icon={faCircleUser}
+                        className="w-10 h-10"
+                     />
+                     <p className="text-xl font-medium">
+                        Olá, {UniqueName(user.name)}
+                     </p>
+                  </button>
+               ) : (
+                  <Link href={'/cliente/login'}>
+                     <button className="flex items-center gap-3 p-2 px-4 bg-success text-base-100">
+                        <FontAwesomeIcon
+                           icon={faCircleUser}
+                           className="w-10 h-10"
+                        />
+                        <p className="text-xl font-medium">Realizar login</p>
+                     </button>
+                  </Link>
+               )}
                <li onClick={toggleDrawer}>
                   <Link href={'/'} passHref>
                      <a>Inicio</a>
@@ -238,6 +252,21 @@ const NavBar = () => {
                      <a>Trabalhe conosco</a>
                   </Link>
                </li>
+
+               {user && (
+                  <li onClick={toggleDrawer}>
+                     <div
+                        className="p-2 px-4 bg-success text-base-100"
+                        onClick={signOut}
+                     >
+                        <FontAwesomeIcon
+                           icon={faRightFromBracket}
+                           className="w-7 h-7"
+                        />
+                        <a>Sair</a>
+                     </div>
+                  </li>
+               )}
             </ul>
          </Drawer>
       </>

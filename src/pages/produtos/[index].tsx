@@ -35,7 +35,6 @@ function Produtos({ product, category }: ProductsProps) {
    ) {
       addProduct(id, price, image, title, amount)
    }
-   console.log(category)
 
    return (
       <div>
@@ -55,7 +54,7 @@ function Produtos({ product, category }: ProductsProps) {
                      quality={100}
                   />
                </div>
-               <div className="card-body max-w-md border gap-10 justify-between">
+               <div className="card-body md:max-w-md border gap-10 justify-between">
                   <div>
                      <div className="text-sm breadcrumbs">
                         <ul>
@@ -214,5 +213,49 @@ export const getServerSideProps = async (ctx: ContextProps) => {
       }
    }
 }
+
+// export const getStaticProps = async ({ params }: any) => {
+//    const api = setupAPIClient()
+//    console.log(params)
+//    try {
+//       const { data } = await api.get(`/product/${params.index}`)
+//       return {
+//          props: {
+//             product: data,
+//          },
+//          revalidate: 60 * 30, //30 minutos, se omitir o valor de revalidate, a página nao atualizará,
+//       }
+//    } catch (error) {
+//       return {
+//          props: {
+//             data: null,
+//          },
+//       }
+//    }
+// }
+
+// export async function getStaticPaths() {
+//    const api = setupAPIClient()
+//    try {
+//       const { data } = await api.get(`/categories`)
+
+//       const paths =
+//          data.data.length > 0 &&
+//          data.data.map((res) => {
+//             res.products.length > 0 &&
+//                res.products.map((r) => {
+//                   return {
+//                      params: {
+//                         index: `${r.id}`,
+//                      },
+//                   }
+//                })
+//          })
+
+//       return { paths, fallback: false }
+//    } catch (error) {
+//       return {}
+//    }
+// }
 
 export default Produtos

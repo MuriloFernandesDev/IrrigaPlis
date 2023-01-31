@@ -38,22 +38,41 @@ function index({ data }: CategoriaProps) {
    )
 }
 
-export const getServerSideProps = async (ctx: ContextProps) => {
-   const query = ctx.query.index
-   const api = setupAPIClient(ctx)
+export const getStaticProps = async ({ params }: ContextProps) => {
+   const api = setupAPIClient()
    try {
-      const { data } = await api.get(`/categories/${query}?per_page=10000`)
-
+      const { data } = await api.get(`/categories/${params.index}`)
       return {
          props: {
             data,
-            query,
          },
+         revalidate: 60 * 30, //30 minutos, se omitir o valor de revalidate, a página nao atualizará,
       }
    } catch (error) {
       return {
-         props: { query },
+         props: {
+            data: null,
+         },
       }
+   }
+}
+
+export async function getStaticPaths() {
+   const api = setupAPIClient()
+   try {
+      const { data } = await api.get(`/categories`)
+
+      const paths = data.data.map((category: any) => {
+         return {
+            params: {
+               index: `${category.id}`,
+            },
+         }
+      })
+
+      return { paths, fallback: false }
+   } catch (error) {
+      return {}
    }
 }
 

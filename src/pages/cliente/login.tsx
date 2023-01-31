@@ -70,12 +70,12 @@ function Login() {
                </div>
                <div className="mt-4">
                   {formState.isSubmitting ? (
-                     <button className="btn loading upper-case py-4 text-PrimaryText flex justify-center w-full btn-info shadow-md border-0">
+                     <button className="btn btn-success loading upper-case py-4 text-white flex justify-center w-full shadow-md border-0">
                         Carregando
                      </button>
                   ) : (
                      <button
-                        className="btn upper-case py-4 text-PrimaryText flex justify-center w-full btn-info shadow-md border-0"
+                        className="btn btn-success upper-case py-4 text-white flex justify-center w-full shadow-md border-0"
                         type="submit"
                      >
                         Entrar
