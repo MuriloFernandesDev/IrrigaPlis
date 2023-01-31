@@ -6,7 +6,7 @@ export default async function handler(
    req: NextApiRequest,
    res: NextApiResponse
 ) {
-   const { '@BuyPhone:Token': token } = parseCookies({ req })
+   const { '@Irriga_plis:Token': token } = parseCookies({ req })
    const { body, method } = req
    const { api }: any = req.query
    const UrlRequest = api.join('/')

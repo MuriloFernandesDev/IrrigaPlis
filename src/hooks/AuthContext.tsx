@@ -29,12 +29,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
    async function signIn({ email, password }: SignInData) {
       try {
-         const { data } = await axios.post('/api/auth/login', {
+         const response = await axios.post('/api/auth/login', {
             email,
             password,
          })
+         setCookies('@Irriga_plis:Token', response.data.token, undefined)
 
-         console.log(data)
+         axios
+            .get('/api/user')
+            .then((response) => {
+               setUser(response.data)
+               Router.push('/')
+            })
+            .catch(() => {
+               toast.error('Ocorreu um erro, tente novamente.')
+            })
       } catch (error: any) {
          if (error?.response.data.message) {
             toast.error('E-mail ou senha inválidos.')
@@ -45,30 +54,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
    async function signOut() {
       try {
          await axios.post('/api/logout')
-         deleteCookie('@BuyPhone:Token')
+         deleteCookie('@Irriga_plis:Token')
          setUser(null)
-         Router.push('/account/login')
-      } catch (err) {
-         deleteCookie('@BuyPhone:Token')
+      } catch {
+         deleteCookie('@Irriga_plis:Token')
          setUser(null)
-         Router.push('/account/login')
       }
    } //função para realizar o logout
 
    useEffect(() => {
       const userSearch = async () => {
-         const { '@BuyPhone:Token': token } = parseCookies()
+         const { '@Irriga_plis:Token': token } = parseCookies()
 
-         //  if (token) {
-         //     axios
-         //        .get('/api/me')
-         //        .then((response) => {
-         //           setUser(response.data)
-         //        })
-         //        .catch(() => {
-         //           destroyCookie(null, '@BuyPhone:Token')
-         //        })
-         //  }
+         if (token) {
+            axios
+               .get('/api/user')
+               .then((response) => {
+                  setUser(response.data)
+               })
+               .catch(() => {
+                  destroyCookie(null, '@Irriga_plis:Token')
+               })
+         }
       }
       userSearch()
    }, []) //effect para buscar usuário pelo token

@@ -2,14 +2,30 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import Banner from '../../components/Banner'
-import ProductCard from '../../components/ProductCard'
-import TuboImg from '../../assets/images/tuboaco.png'
 import { useCart } from '../../hooks/useCart'
 import { useState } from 'react'
+import { setupAPIClient } from '../../services/api'
+import { ICategories2, IProduct } from '../../types/types'
+import DefaultImg from '../../assets/images/default.png'
+import { GetServerSidePropsContext } from 'next'
+import ProductCard from '../../components/ProductCard'
 
-function Produtos() {
+interface ProductsProps {
+   product: IProduct
+   category: ICategories2
+}
+
+interface ContextProps extends GetServerSidePropsContext {
+   params: {
+      index: string
+   }
+}
+
+function Produtos({ product, category }: ProductsProps) {
    const { addProduct } = useCart()
    const [amount, setAmount] = useState(1)
+   const [price, setPrice] = useState<number | null>(null)
+
    function handleAddProduct(
       id: number,
       price: number,
@@ -19,6 +35,7 @@ function Produtos() {
    ) {
       addProduct(id, price, image, title, amount)
    }
+   console.log(category)
 
    return (
       <div>
@@ -27,9 +44,13 @@ function Produtos() {
             <div className="card flex-col-reverse md:flex-row max-w-5xl mx-auto">
                <div className="card-body justify-center items-center">
                   <Image
-                     src={TuboImg}
-                     width={300}
-                     height={300}
+                     src={
+                        product.media[0]
+                           ? product.media[0].original_url
+                           : DefaultImg
+                     }
+                     width={550}
+                     height={550}
                      layout="fixed"
                      quality={100}
                   />
@@ -48,7 +69,7 @@ function Produtos() {
                         </ul>
                      </div>
                      <h1 className="text-3xl font-medium text-black">
-                        Tubo de aço zincado engate rápido
+                        {product.name}
                      </h1>
                   </div>
                   <div className="flex gap-3 w-full">
@@ -57,13 +78,20 @@ function Produtos() {
                         <select
                            defaultValue={3}
                            className="select min-h-16 max-w-md bg-transparent select-accent"
+                           onChange={(e) => setPrice(Number(e.target.value)!)}
+                           defaultChecked
                         >
-                           <option value={1}>192mm</option>
-                           <option value={2}>192mm</option>
-                           <option value={3}>192mm</option>
-                           <option value={4}>192mm</option>
-                           <option value={5}>192mm</option>
-                           <option value={6}>192mm</option>
+                           <option value={'default'}>Selecione...</option>
+                           {product.variations.map((res, index) => {
+                              return (
+                                 <option key={index} value={res.price}>
+                                    {res.attributes["'medidas'"].replace(
+                                       '"',
+                                       ''
+                                    )}
+                                 </option>
+                              )
+                           })}
                         </select>
                      </div>
                      <div className="flex flex-col gap-3">
@@ -100,30 +128,39 @@ function Produtos() {
                   </div>
                   <div>
                      <p>Descrição</p>
-                     <span>• 49716 Canhão de 3" Plona Mod. ECO-8</span>
+                     <span>• {product.description}</span>
                   </div>
                   <div className="card-actions flex-col">
                      <button className="btn bg-[#008C4F] border-transparent text-base-100 w-full">
                         Solicitar orçamento
                      </button>
-                     <button
-                        onClick={() =>
-                           handleAddProduct(
-                              1,
-                              1000,
-                              'https://irriga-plis.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftuboaco.d3bdb50d.png&w=256&q=75',
-                              'Tubo de aço zincado - IP-20',
-                              amount
-                           )
-                        }
-                        className="btn btn-success border-transparent text-base-100 w-full"
-                     >
-                        Adicionar ao carrinho
-                     </button>
+                     {price === null ? (
+                        <button
+                           disabled
+                           className="btn btn-disabled border-transparent text-base-100 w-full"
+                        >
+                           Adicionar ao carrinho
+                        </button>
+                     ) : (
+                        <button
+                           onClick={() =>
+                              handleAddProduct(
+                                 product.id,
+                                 price,
+                                 product.media[0].original_url,
+                                 product.name,
+                                 amount
+                              )
+                           }
+                           className="btn btn-success border-transparent text-base-100 w-full"
+                        >
+                           Adicionar ao carrinho
+                        </button>
+                     )}
                   </div>
                </div>
             </div>
-            <div className="max-w-7xl mx-auto md:mt-16">
+            <div className="max-w-7xl mx-auto md:mt-16 px-4">
                <div className="flex gap-3 items-center mb-8">
                   <h1 className="text-2xl font-medium text-primary">
                      Veja também
@@ -136,15 +173,46 @@ function Produtos() {
                   </span>
                </div>
                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <ProductCard />
-                  <ProductCard />
-                  <ProductCard />
-                  <ProductCard />
+                  {category.data.length > 0 &&
+                     category.data.slice(0, 4).map((r) => {
+                        return (
+                           <ProductCard
+                              key={r.id}
+                              img={r.image_url}
+                              title={r.name}
+                              description={r.description}
+                              id={r.id}
+                           />
+                        )
+                     })}
                </div>
             </div>
          </div>
       </div>
    )
+}
+
+export const getServerSideProps = async (ctx: ContextProps) => {
+   const query = ctx.params.index
+   const api = setupAPIClient(ctx)
+   try {
+      const { data: product } = await api.get(`/product/${query}`)
+
+      const { data: category } = await api.get(
+         `/categories/${product.category_id}`
+      )
+
+      return {
+         props: {
+            product,
+            category,
+         },
+      }
+   } catch (error) {
+      return {
+         props: { product: null, category: null },
+      }
+   }
 }
 
 export default Produtos

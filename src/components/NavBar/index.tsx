@@ -2,18 +2,25 @@ import Image from 'next/image'
 import LogoImg from '../../assets/images/logo.webp'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
-import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons'
+import {
+   faCartShopping,
+   faCircleUser,
+   faUser,
+} from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { useRouter } from 'next/router'
 import { useCart } from '../../hooks/useCart'
+import { AuthContext } from '../../hooks/AuthContext'
+import { UniqueName } from '../../utils/masks'
 
 const NavBar = () => {
    const router = useRouter()
    const [openDrawer, setOpenDrawer] = useState(false)
    const { cartSize } = useCart()
+   const { user, signOut } = useContext(AuthContext)
 
    const toggleDrawer = () => {
       setOpenDrawer((prevState) => !prevState)
@@ -91,14 +98,52 @@ const NavBar = () => {
                         </p>
                      </button>
 
-                     <Link href={'/cliente/login'}>
-                        <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success text-base-100">
-                           <FontAwesomeIcon
-                              icon={faUser}
-                              className="w-4 h-4 relative"
-                           />
-                        </button>
-                     </Link>
+                     {user ? (
+                        <div className="hidden sm:inline-block dropdown dropdown-end">
+                           <label tabIndex={0}>
+                              <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success text-base-100">
+                                 <FontAwesomeIcon
+                                    icon={faCircleUser}
+                                    className="w-4 h-4"
+                                 />
+                                 <p className="text-[10px] font-medium hidden md:block">
+                                    Olá, {UniqueName(user.name)}
+                                 </p>
+                              </button>
+                           </label>
+                           <ul
+                              tabIndex={0}
+                              className="menu menu-compact dropdown-content mt-3 p-2 bg-base-200 rounded-box w-52 shadow-2xl"
+                           >
+                              <li>
+                                 <a>Meus Dados</a>
+                              </li>
+                              <li>
+                                 <a>Meus pedidos</a>
+                              </li>
+                              {user && (
+                                 <li>
+                                    <button
+                                       className="text-left w-full"
+                                       type="submit"
+                                       onClick={signOut}
+                                    >
+                                       Sair
+                                    </button>
+                                 </li>
+                              )}
+                           </ul>
+                        </div>
+                     ) : (
+                        <Link href={'/cliente/login'}>
+                           <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success text-base-100">
+                              <FontAwesomeIcon
+                                 icon={faUser}
+                                 className="w-4 h-4 relative"
+                              />
+                           </button>
+                        </Link>
+                     )}
                      <button className="block md:hidden" onClick={toggleDrawer}>
                         <svg
                            className={'swap-off fill-current '}

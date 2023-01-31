@@ -5,36 +5,14 @@ import Link from 'next/link'
 import Banner from '../../components/Banner'
 import ProductCard from '../../components/ProductCard'
 import { setupAPIClient } from '../../services/api'
-import { ICategories, IProducts } from '../../types/types'
+import { ICategories } from '../../types/types'
 
 interface CategoriesProps {
    categories: ICategories[]
 }
 
-interface ProductsProps {
-   products: IProducts
-}
 //recebe categories do lado servidor
 function Products({ categories }: CategoriesProps) {
-   //state para receber os dados dos produtos
-   // const [products, setProducts] = useState<ProductsProps[]>([])
-
-   //Effect para passar pelo categories chamando todas as paginas dos produtos
-   // useEffect(() => {
-   //    categories.map(async (res) => {
-   //       const { data } = await axios.get(`/api/categories/${res.id}`)
-   //       setProducts((products) => [...products, { ...data, ...res }])
-   //    })
-   // }, [])
-
-   // async function returnProduct(id: number) {
-   //    const { data: product } = await axios.get(`/api/categories/${id}`)
-   //    product.map((res) => {
-   //       console.log(res)
-   //       return <ProductCard />
-   //    })
-   // }
-
    return (
       <div>
          <Banner title="nossos produtos" />
@@ -67,6 +45,7 @@ function Products({ categories }: CategoriesProps) {
                                              img={r.image_url}
                                              title={r.name}
                                              description={r.description}
+                                             id={res.id}
                                           />
                                        </div>
                                     )
@@ -74,7 +53,7 @@ function Products({ categories }: CategoriesProps) {
                            </div>
                         </div>
                      )
-                  ) //returnProduct(res.id)
+                  )
                })}
          </div>
       </div>
@@ -85,19 +64,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
    const api = setupAPIClient(ctx)
    try {
       const { data: categoriesData } = await api.get('/categories')
-      console.log(categoriesData.data)
-
-      // const productData = []
-
-      // await categoriesData.data.map((res) => {
-      //    async function getProducts() {
-      //       const data = await api.get(`/categories/${res.id}`)
-      //       productData.push(data)
-      //    }
-      //    getProducts()
-      // })
-
-      // console.log(productData)
 
       return {
          props: {
