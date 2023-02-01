@@ -98,7 +98,7 @@ function Treatment() {
                </h2>
                <div className="flex flex-col md:flex-row justify-between w-full gap-5">
                   <a
-                     href="https://wa.me/+551836542248"
+                     href="tel:+551836542248"
                      target={'_blank'}
                      className="card shadow-md w-full hover:scale-105 transition-all duration-200"
                   >
@@ -118,7 +118,7 @@ function Treatment() {
                      </div>
                   </a>
                   <a
-                     href="https://wa.me/+551836542248"
+                     href="sms:+551836542248?&body=Olá%2520alguém%2520disponível%2520para%2520me%2520atender?"
                      target={'_blank'}
                      className="card shadow-md w-full hover:scale-105 transition-all duration-200"
                   >
