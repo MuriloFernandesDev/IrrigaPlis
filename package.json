@@ -26,6 +26,7 @@
       "react-toastify": "^9.0.8",
       "sass": "^1.55.0",
       "superagent": "^8.0.9",
+      "react-accessible-accordion": "^5.0.0",
       "yup": "^0.32.11"
    },
    "devDependencies": {

@@ -3,6 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import * as yup from 'yup'
 import Link from 'next/link'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 type ForgoutFormData = {
    email: string
@@ -25,7 +27,14 @@ function RecuperarSenha() {
       event
    ) => {
       event?.preventDefault()
-      console.log(values)
+      try {
+         await axios.post('/api/forgot-password', values)
+         toast.success(
+            'Enviamos um e-mail de recuperação de senha para o e-mail informado.'
+         )
+      } catch {
+         toast.error('Confira o e-mail digitado.')
+      }
    }
 
    return (

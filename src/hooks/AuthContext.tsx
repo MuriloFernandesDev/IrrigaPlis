@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import { parseCookies, destroyCookie } from 'nookies'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 import Router from 'next/router'
 import { setCookies } from '../utils/useCookies'
 import { toast } from 'react-toastify'

@@ -94,9 +94,14 @@ const NavBar = () => {
                            icon={faFacebook}
                            className="w-4 h-4"
                         />
-                        <p className="text-[10px] font-medium hidden md:block">
+
+                        <a
+                           target={'_blank'}
+                           href="https://www.facebook.com/irrigacaopenapolis?mibextid=LQQJ4d"
+                           className="text-[10px] font-medium hidden md:block"
+                        >
                            Social
-                        </p>
+                        </a>
                      </button>
 
                      {user ? (

@@ -62,7 +62,7 @@ function Login() {
                   error={errors.password}
                />
                <div className="flex justify-end w-full">
-                  <Link href={'/account/forgout-password'} passHref>
+                  <Link href={'/cliente/recuperar-senha'} passHref>
                      <a className="text-xs  text-blue-600 link cursor-pointer">
                         Esqueceu sua senha?
                      </a>

@@ -154,7 +154,9 @@ function Produtos({ product, category }: ProductsProps) {
                               handleAddProduct(
                                  product.id,
                                  price,
-                                 product.media[0].original_url,
+                                 product.media[0]
+                                    ? product.media[0].original_url
+                                    : '',
                                  product.name,
                                  amount
                               )
@@ -199,71 +201,49 @@ function Produtos({ product, category }: ProductsProps) {
    )
 }
 
-export const getServerSideProps = async (ctx: ContextProps) => {
-   const query = ctx.params.index
-   const api = setupAPIClient(ctx)
+export const getStaticProps = async ({ params }: ContextProps) => {
+   const api = setupAPIClient()
+   console.log(params)
    try {
-      const { data: product } = await api.get(`/product/${query}`)
-
+      const { data } = await api.get(`/product/${params.index}`)
       const { data: category } = await api.get(
-         `/categories/${product.category_id}`
+         `/categories/${data.category_id}`
       )
-
       return {
          props: {
-            product,
+            product: data,
             category,
          },
+         revalidate: 60 * 30, //30 minutos, se omitir o valor de revalidate, a página nao atualizará,
       }
    } catch (error) {
       return {
-         props: { product: null, category: null },
+         props: {
+            data: null,
+         },
       }
    }
 }
 
-// export const getStaticProps = async ({ params }: any) => {
-//    const api = setupAPIClient()
-//    console.log(params)
-//    try {
-//       const { data } = await api.get(`/product/${params.index}`)
-//       return {
-//          props: {
-//             product: data,
-//          },
-//          revalidate: 60 * 30, //30 minutos, se omitir o valor de revalidate, a página nao atualizará,
-//       }
-//    } catch (error) {
-//       return {
-//          props: {
-//             data: null,
-//          },
-//       }
-//    }
-// }
+export async function getStaticPaths() {
+   const api = setupAPIClient()
+   try {
+      const { data } = await api.get(`/products`)
 
-// export async function getStaticPaths() {
-//    const api = setupAPIClient()
-//    try {
-//       const { data } = await api.get(`/categories`)
+      const paths =
+         data.length > 0 &&
+         data.map((r: any) => {
+            return {
+               params: {
+                  index: `${r.id}`,
+               },
+            }
+         })
 
-//       const paths =
-//          data.data.length > 0 &&
-//          data.data.map((res) => {
-//             res.products.length > 0 &&
-//                res.products.map((r) => {
-//                   return {
-//                      params: {
-//                         index: `${r.id}`,
-//                      },
-//                   }
-//                })
-//          })
-
-//       return { paths, fallback: false }
-//    } catch (error) {
-//       return {}
-//    }
-// }
+      return { paths, fallback: false }
+   } catch (error) {
+      return {}
+   }
+}
 
 export default Produtos
