@@ -117,10 +117,9 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
             //se nao, adiciona ao carrinho
             const newProduct = { id, price, image, title, amount: amount }
             updatedCart.push(newProduct)
-            toast.success(`${title} adicionado ao carrinho`)
          }
          //Atualizando o Carrinho
-
+         toast.success(`${title} adicionado ao carrinho`)
          setCart(updatedCart)
       } catch {
          //Caso dê algum erro exibir uma notificação

@@ -1,15 +1,26 @@
 import Image, { StaticImageData } from 'next/image'
+import Link from 'next/link'
 
 interface CircleProps {
    image: string | StaticImageData
    title: string
+   url: number | null
 }
-const CircleDetails = ({ image, title }: CircleProps) => {
+const CircleDetails = ({ image, title, url }: CircleProps) => {
    return (
-      <div className="flex flex-col justify-center items-center">
-         <Image src={image} width={160} height={160} className="rounded-full" />
-         <p className="text-base font-bold text-center text-primary">{title}</p>
-      </div>
+      <Link href={url ? `/produtos/${url}` : '/'}>
+         <div className="flex flex-col justify-center items-center transition-all hover:scale-105 duration-200 cursor-pointer">
+            <Image
+               src={image}
+               width={160}
+               height={160}
+               className="rounded-full"
+            />
+            <p className="text-base font-bold text-center text-primary">
+               {title}
+            </p>
+         </div>
+      </Link>
    )
 }
 

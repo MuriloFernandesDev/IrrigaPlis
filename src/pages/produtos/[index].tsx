@@ -40,7 +40,7 @@ function Produtos({ product, category }: ProductsProps) {
    return (
       <div>
          <Banner title="tubos" />
-         <div className="my-16 px-4">
+         <div className="my-16 px-4 max-w-7xl mx-auto">
             <div className="card flex-col-reverse md:flex-row max-w-5xl mx-auto">
                <div className="card-body justify-center items-center">
                   <Image
@@ -184,7 +184,8 @@ function Produtos({ product, category }: ProductsProps) {
                   </span>
                </div>
                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {category.data.length > 0 &&
+                  {category &&
+                     category.data.length > 0 &&
                      category.data.slice(0, 4).map((r) => {
                         return (
                            <ProductCard

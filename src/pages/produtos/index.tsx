@@ -16,7 +16,7 @@ function Products({ categories }: CategoriesProps) {
    return (
       <div>
          <Banner title="nossos produtos" />
-         <div className="my-16 px-4">
+         <div className="my-16 px-4 max-w-7xl mx-auto">
             {categories?.length > 0 &&
                categories.map((res) => {
                   return (

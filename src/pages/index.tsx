@@ -1,13 +1,17 @@
-import type { NextPage } from 'next'
-import Image from 'next/image'
-import Container from '../components/Container'
+import type { GetServerSidePropsContext } from 'next'
 import CircleImg1 from '../assets/images/circleImg1.webp'
 import CircleDetails from '../components/CircleDetails'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBuilding } from '@fortawesome/free-solid-svg-icons'
-import MapaImg from '../assets/images/mapa.webp'
+import { setupAPIClient } from '../services/api'
+import { ICategories } from '../types/types'
+import DefaultImg from '../assets/images/default.png'
 
-const Home: NextPage = () => {
+interface CategoriaProps {
+   categories: ICategories[]
+}
+
+const Home = ({ categories }: CategoriaProps) => {
    return (
       <>
          <div className="py-32 mx-auto max-w-[1600px] bg-cover bg-no-repeat bg-center bg-[url(../../src/assets/images/bannerHome.webp)]">
@@ -33,12 +37,27 @@ const Home: NextPage = () => {
          </div>
 
          <div className="flex flex-wrap w-full max-w-7xl my-10 mx-auto justify-around">
-            <CircleDetails image={CircleImg1} title="PIVÔ IRRIGAÇÃO" />
-            <CircleDetails image={CircleImg1} title="PIVÔ IRRIGAÇÃO" />
-            <CircleDetails image={CircleImg1} title="PIVÔ IRRIGAÇÃO" />
-            <CircleDetails image={CircleImg1} title="PIVÔ IRRIGAÇÃO" />
-            <CircleDetails image={CircleImg1} title="PIVÔ IRRIGAÇÃO" />
-            <CircleDetails image={CircleImg1} title="PIVÔ IRRIGAÇÃO" />
+            {categories &&
+               categories.length > 0 &&
+               categories.map((categorie) => {
+                  return (
+                     <CircleDetails
+                        image={
+                           categorie.products[0]
+                              ? categorie.products[0].image_url
+                              : DefaultImg
+                        }
+                        title={
+                           categorie.products[0] && categorie.products[0].name
+                        }
+                        url={
+                           categorie.products[0]
+                              ? categorie.products[0].id
+                              : null
+                        }
+                     />
+                  )
+               })}
          </div>
          <div className="max-w-7xl mx-auto px-4">
             <div className="w-full flex justify-center md:justify-start my-11">
@@ -92,6 +111,26 @@ const Home: NextPage = () => {
          </div>
       </>
    )
+}
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+   const api = setupAPIClient(ctx)
+   try {
+      const { data: categoriesData } = await api.get('/categories')
+
+      return {
+         props: {
+            categories: categoriesData.data,
+         },
+      }
+   } catch (error) {
+      console.log(error)
+      return {
+         props: {
+            categories: null,
+         },
+      }
+   }
 }
 
 export default Home

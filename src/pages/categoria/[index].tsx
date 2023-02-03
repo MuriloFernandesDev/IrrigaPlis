@@ -19,7 +19,7 @@ function index({ data }: CategoriaProps) {
          <h1 className="text-2xl font-medium text-primary">
             {data && data.data[0].name}
          </h1>
-         <div className="grid grid-cols-2 md:grid-cols-4 mt-10">
+         <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-10">
             {data &&
                data.data.length > 0 &&
                data.data.map((r) => {

@@ -20,7 +20,8 @@ function MyApp({ Component, pageProps }: AppProps) {
                <ToastContainer />
                {router.route === '/cliente/login' ||
                router.route === '/cliente/cadastro' ||
-               router.route === '/cliente/recuperar-senha' ? (
+               router.route === '/cliente/recuperar-senha' ||
+               router.route === `/reset-password/[index]` ? (
                   <AuthComponent>
                      <Component {...pageProps} />
                   </AuthComponent>
