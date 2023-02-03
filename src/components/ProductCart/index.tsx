@@ -1,9 +1,7 @@
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import { useCart } from '../../hooks/useCart'
 import { Product } from '../../types/types'
-import { formatPrice } from '../../utils/format'
+import DefaultImg from '../../assets/images/default.png'
 
 const ProductCart = ({ product }: any) => {
    const { removeProduct, updateProductAmount } = useCart()
@@ -24,7 +22,7 @@ const ProductCart = ({ product }: any) => {
       <div className="flex justify-between">
          <div className="flex items-center gap-3">
             <Image
-               src={product.image}
+               src={product.image ? product.image : DefaultImg}
                alt={product.title}
                layout="fixed"
                width={100}
@@ -33,11 +31,6 @@ const ProductCart = ({ product }: any) => {
             <h1 className="text-primary">{product.title}</h1>
          </div>
          <div className="flex flex-col items-center justify-center">
-            <div className="flex flex-col">
-               <p className="text-lg text-primary">
-                  {formatPrice(product.price * product.amount)}
-               </p>
-            </div>
             <div className="flex items-center justify-center">
                <div className="btn-group">
                   <button

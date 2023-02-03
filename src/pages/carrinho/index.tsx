@@ -34,12 +34,12 @@ const Cart = (): JSX.Element => {
                            ? cartSize + ' Produto'
                            : 'Carrinho está vazio'}
                      </span>
-                     <span>{formatPrice(somaTotal)}</span>
+                     <span>Solicitar orçamento</span>
                   </div>
                   <div className="divider m-0" />
                   <div className="flex justify-between">
                      <span className="font-thin text-lg">Total</span>
-                     <span>{formatPrice(somaTotal)}</span>
+                     <span>Solicitar orçamento</span>
                   </div>
                   <div className="flex flex-col md:flex-row justify-between gap-3">
                      <button className="btn btn-ghost">

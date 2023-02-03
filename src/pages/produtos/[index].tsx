@@ -25,7 +25,6 @@ interface ContextProps extends GetServerSidePropsContext {
 function Produtos({ product, category }: ProductsProps) {
    const { addProduct } = useCart()
    const [amount, setAmount] = useState(1)
-   const [price, setPrice] = useState<number | null>(null)
 
    function handleAddProduct(
       id: number,
@@ -86,21 +85,21 @@ function Produtos({ product, category }: ProductsProps) {
                         <select
                            defaultValue={3}
                            className="select min-h-16 max-w-md bg-transparent select-accent"
-                           onChange={(e) => setPrice(Number(e.target.value)!)}
                            defaultChecked
                         >
                            <option value={'default'}>Selecione...</option>
-                           {product &&
+                           <option value={11}>teste</option>
+                           {/* {product &&
                               product.variations.map((res, index) => {
                                  return (
-                                    <option key={index} value={res.price}>
+                                    <option key={index}>
                                        {res.attributes["'medidas'"].replace(
                                           '"',
                                           ''
                                        )}
                                     </option>
                                  )
-                              })}
+                              })} */}
                         </select>
                      </div>
                      <div className="flex flex-col gap-3">
@@ -143,31 +142,23 @@ function Produtos({ product, category }: ProductsProps) {
                      <button className="btn bg-[#008C4F] border-transparent text-base-100 w-full">
                         Solicitar orçamento
                      </button>
-                     {price === null ? (
-                        <button
-                           disabled
-                           className="btn btn-disabled border-transparent text-base-100 w-full"
-                        >
-                           Adicionar ao carrinho
-                        </button>
-                     ) : (
-                        <button
-                           onClick={() =>
-                              handleAddProduct(
-                                 product.id,
-                                 price!,
-                                 product.media[0]
-                                    ? product.media[0].original_url
-                                    : '',
-                                 product.name,
-                                 amount
-                              )
-                           }
-                           className="btn btn-success border-transparent text-base-100 w-full"
-                        >
-                           Adicionar ao carrinho
-                        </button>
-                     )}
+
+                     <button
+                        onClick={() =>
+                           handleAddProduct(
+                              product && product.id,
+                              0,
+                              product.media[0]
+                                 ? product.media[0].original_url
+                                 : '',
+                              product && product.name,
+                              amount
+                           )
+                        }
+                        className="btn btn-success border-transparent text-base-100 w-full"
+                     >
+                        Adicionar ao carrinho
+                     </button>
                   </div>
                </div>
             </div>
