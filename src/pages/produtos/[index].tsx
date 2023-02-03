@@ -120,13 +120,17 @@ function Produtos({ product, category }: ProductsProps) {
                                        className="select min-h-16 max-w-md bg-transparent select-accent"
                                        defaultChecked
                                        onChange={(e) =>
-                                          handleAddOptions(
-                                             s.title,
-                                             e.target.value
-                                          )
+                                          e.target.value !== 'default'
+                                             ? handleAddOptions(
+                                                  s.title,
+                                                  e.target.value
+                                               )
+                                             : toast.warning(
+                                                  'Selecione uma opção de produto'
+                                               )
                                        }
                                     >
-                                       <option disabled value={'default'}>
+                                       <option value={'default'}>
                                           Selecione...
                                        </option>
                                        {s.options.map((op) => {
