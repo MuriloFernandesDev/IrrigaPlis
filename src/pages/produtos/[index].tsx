@@ -10,6 +10,7 @@ import DefaultImg from '../../assets/images/default.png'
 import { GetServerSidePropsContext } from 'next'
 import ProductCard from '../../components/ProductCard'
 import { FirstUpper } from '../../utils/masks'
+import { toast } from 'react-toastify'
 
 interface ProductsProps {
    product: IProduct
@@ -125,7 +126,7 @@ function Produtos({ product, category }: ProductsProps) {
                                           )
                                        }
                                     >
-                                       <option value={'default'}>
+                                       <option disabled value={'default'}>
                                           Selecione...
                                        </option>
                                        {s.options.map((op) => {
@@ -188,15 +189,19 @@ function Produtos({ product, category }: ProductsProps) {
 
                      <button
                         onClick={() =>
-                           handleAddProduct(
-                              product && product.id,
-                              0,
-                              product.media[0]
-                                 ? product.media[0].original_url
-                                 : '',
-                              product && product.name,
-                              amount
-                           )
+                           options[0] && options[0].title
+                              ? handleAddProduct(
+                                   product && product.id,
+                                   0,
+                                   product.media[0]
+                                      ? product.media[0].original_url
+                                      : '',
+                                   product && product.name,
+                                   amount
+                                )
+                              : toast.warning(
+                                   'Selecione alguma opção de produto'
+                                )
                         }
                         className="btn btn-success border-transparent text-base-100 w-full"
                      >
