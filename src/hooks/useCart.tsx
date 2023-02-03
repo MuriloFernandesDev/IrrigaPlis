@@ -26,7 +26,8 @@ interface CartContextData {
       price: number,
       image: string,
       title: string,
-      amount: number
+      amount: number,
+      options: any
    ) => Promise<void>
    removeProduct: (id: number) => void
    updateProductAmount: ({ id, amount }: UpdateProductAmount) => void
@@ -95,7 +96,8 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       price: number,
       image: string,
       title: string,
-      amount: number
+      amount: number,
+      options: any
    ) => {
       try {
          //Criando um novo array para manipular o cart
@@ -115,7 +117,14 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
             productExists.amount = newAmount
          } else {
             //se nao, adiciona ao carrinho
-            const newProduct = { id, price, image, title, amount: amount }
+            const newProduct = {
+               id,
+               price,
+               image,
+               title,
+               amount: amount,
+               options: options,
+            }
             updatedCart.push(newProduct)
          }
          //Atualizando o Carrinho

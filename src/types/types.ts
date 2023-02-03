@@ -87,9 +87,12 @@ export interface IProduct {
          preview_url: string
       }
    ]
+
    select: {
-      ["'medidas'"]: Array<string>
-   }
+      options: string[]
+      title: string
+   }[]
+
    variations: Array<{
       attributes: {
          ["'medidas'"]: string

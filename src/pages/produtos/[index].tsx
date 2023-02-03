@@ -25,6 +25,9 @@ interface ContextProps extends GetServerSidePropsContext {
 function Produtos({ product, category }: ProductsProps) {
    const { addProduct } = useCart()
    const [amount, setAmount] = useState(1)
+   const [options, setOptions] = useState<{ title: string; value: string }[]>(
+      []
+   )
 
    function handleAddProduct(
       id: number,
@@ -33,7 +36,32 @@ function Produtos({ product, category }: ProductsProps) {
       title: string,
       amount: number
    ) {
-      addProduct(id, price, image, title, amount)
+      addProduct(id, price, image, title, amount, options)
+   }
+
+   function handleAddOptions(title: string, option: string) {
+      //se option com o title existe, ele apaga o existente da memoria e cria com o valor novo
+      const optionExist = options.find((option) => option.title === title)
+      if (optionExist) {
+         setOptions((oldState) =>
+            oldState.filter((option) => option.title !== title)
+         )
+         setOptions((options: any) => [
+            ...options,
+            {
+               title: title,
+               value: option,
+            },
+         ])
+      } else {
+         setOptions((options: any) => [
+            ...options,
+            {
+               title: title,
+               value: option,
+            },
+         ])
+      }
    }
 
    return (
@@ -81,26 +109,41 @@ function Produtos({ product, category }: ProductsProps) {
                   </div>
                   <div className="flex gap-3 w-full">
                      <div className="flex flex-col gap-3">
-                        <p>Tamanho</p>
-                        <select
-                           defaultValue={3}
-                           className="select min-h-16 max-w-md bg-transparent select-accent"
-                           defaultChecked
-                        >
-                           <option value={'default'}>Selecione...</option>
-                           <option value={11}>teste</option>
-                           {/* {product &&
-                              product.variations.map((res, index) => {
-                                 return (
-                                    <option key={index}>
-                                       {res.attributes["'medidas'"].replace(
-                                          '"',
-                                          ''
-                                       )}
-                                    </option>
-                                 )
-                              })} */}
-                        </select>
+                        {product.select &&
+                           product.select.map((s) => {
+                              return (
+                                 <div key={s.title}>
+                                    <p>{s.title && FirstUpper(s.title)}</p>
+                                    <select
+                                       defaultValue={3}
+                                       className="select min-h-16 max-w-md bg-transparent select-accent"
+                                       defaultChecked
+                                       onChange={(e) =>
+                                          handleAddOptions(
+                                             s.title,
+                                             e.target.value
+                                          )
+                                       }
+                                    >
+                                       <option value={'default'}>
+                                          Selecione...
+                                       </option>
+                                       {s.options.map((op) => {
+                                          return (
+                                             <option
+                                                key={op}
+                                                value={
+                                                   op && op.replace(/["]/g, '')
+                                                }
+                                             >
+                                                {op && op.replace(/["]/g, '')}
+                                             </option>
+                                          )
+                                       })}
+                                    </select>
+                                 </div>
+                              )
+                           })}
                      </div>
                      <div className="flex flex-col gap-3">
                         <p>Quantidade</p>
@@ -234,7 +277,7 @@ export async function getStaticPaths() {
             }
          })
 
-      return { paths, fallback: true }
+      return { paths, fallback: false }
    } catch (error) {
       return {}
    }

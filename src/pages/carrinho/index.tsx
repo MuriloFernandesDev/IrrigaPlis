@@ -7,6 +7,7 @@ import { formatPrice } from '../../utils/format'
 
 const Cart = (): JSX.Element => {
    const { cart, somaTotal, cartSize } = useCart()
+   console.log(cart)
 
    return (
       <div className="max-w-7xl mx-auto py-10 px-4">
