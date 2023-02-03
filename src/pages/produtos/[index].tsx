@@ -45,7 +45,7 @@ function Produtos({ product, category }: ProductsProps) {
                <div className="card-body justify-center items-center">
                   <Image
                      src={
-                        product.media[0]
+                        product && product.media[0]
                            ? product.media[0].original_url
                            : DefaultImg
                      }
@@ -66,17 +66,18 @@ function Produtos({ product, category }: ProductsProps) {
                               <a>Categoria</a>
                            </li>
                            <li>
-                              {FirstUpper(
-                                 category.data[0].name
-                                    .substring(0, 11)
-                                    .toLowerCase()
-                              )}
+                              {category &&
+                                 FirstUpper(
+                                    category.data[0].name
+                                       .substring(0, 11)
+                                       .toLowerCase()
+                                 )}
                               ...
                            </li>
                         </ul>
                      </div>
                      <h1 className="text-3xl font-medium text-black">
-                        {product.name}
+                        {product && product.name}
                      </h1>
                   </div>
                   <div className="flex gap-3 w-full">
@@ -89,16 +90,17 @@ function Produtos({ product, category }: ProductsProps) {
                            defaultChecked
                         >
                            <option value={'default'}>Selecione...</option>
-                           {product.variations.map((res, index) => {
-                              return (
-                                 <option key={index} value={res.price}>
-                                    {res.attributes["'medidas'"].replace(
-                                       '"',
-                                       ''
-                                    )}
-                                 </option>
-                              )
-                           })}
+                           {product &&
+                              product.variations.map((res, index) => {
+                                 return (
+                                    <option key={index} value={res.price}>
+                                       {res.attributes["'medidas'"].replace(
+                                          '"',
+                                          ''
+                                       )}
+                                    </option>
+                                 )
+                              })}
                         </select>
                      </div>
                      <div className="flex flex-col gap-3">
@@ -135,7 +137,7 @@ function Produtos({ product, category }: ProductsProps) {
                   </div>
                   <div>
                      <p>Descrição</p>
-                     <span>• {product.description}</span>
+                     <span>• {product && product.description}</span>
                   </div>
                   <div className="card-actions flex-col">
                      <button className="btn bg-[#008C4F] border-transparent text-base-100 w-full">
@@ -153,7 +155,7 @@ function Produtos({ product, category }: ProductsProps) {
                            onClick={() =>
                               handleAddProduct(
                                  product.id,
-                                 price,
+                                 price!,
                                  product.media[0]
                                     ? product.media[0].original_url
                                     : '',
@@ -203,7 +205,6 @@ function Produtos({ product, category }: ProductsProps) {
 
 export const getStaticProps = async ({ params }: ContextProps) => {
    const api = setupAPIClient()
-   console.log(params)
    try {
       const { data } = await api.get(`/product/${params.index}`)
       const { data: category } = await api.get(
@@ -219,7 +220,8 @@ export const getStaticProps = async ({ params }: ContextProps) => {
    } catch (error) {
       return {
          props: {
-            data: null,
+            product: null,
+            category: null,
          },
       }
    }
@@ -240,7 +242,7 @@ export async function getStaticPaths() {
             }
          })
 
-      return { paths, fallback: false }
+      return { paths, fallback: true }
    } catch (error) {
       return {}
    }

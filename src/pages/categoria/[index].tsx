@@ -17,10 +17,11 @@ function index({ data }: CategoriaProps) {
    return (
       <div className="my-16 px-4">
          <h1 className="text-2xl font-medium text-primary">
-            {data.data[0].name}
+            {data && data.data[0].name}
          </h1>
          <div className="grid grid-cols-2 md:grid-cols-4 mt-10">
-            {data.data.length > 0 &&
+            {data &&
+               data.data.length > 0 &&
                data.data.map((r) => {
                   return (
                      <div key={r.id}>
@@ -70,7 +71,7 @@ export async function getStaticPaths() {
          }
       })
 
-      return { paths, fallback: false }
+      return { paths, fallback: true }
    } catch (error) {
       return {}
    }
