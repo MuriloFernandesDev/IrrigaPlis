@@ -137,18 +137,20 @@ function Produtos({ product, category }: ProductsProps) {
                                     <option value={'default'}>
                                        Selecione...
                                     </option>
-                                    {s.options.map((op) => {
-                                       return (
-                                          <option
-                                             key={op}
-                                             value={
-                                                op && op.replace(/["]/g, '')
-                                             }
-                                          >
-                                             {op && op.replace(/["]/g, '')}
-                                          </option>
-                                       )
-                                    })}
+                                    {s.options &&
+                                       s.options.length > 0 &&
+                                       s.options.map((op) => {
+                                          return (
+                                             <option
+                                                key={op}
+                                                value={
+                                                   op && op.replace(/["]/g, '')
+                                                }
+                                             >
+                                                {op && op.replace(/["]/g, '')}
+                                             </option>
+                                          )
+                                       })}
                                  </select>
                               </div>
                            )
