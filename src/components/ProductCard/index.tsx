@@ -12,14 +12,15 @@ interface ProductCardProps {
 const ProductCard = ({ title, description, img, id }: ProductCardProps) => {
    return (
       <Link href={`/produtos/${id}`}>
-         <div className="card card-compact bg-base-100 shadow-xl sm:card-normal max-w-xs transition-all duration-300 md:hover:scale-105 max-h-[420px] min-h-[420px]">
+         <div className="cursor-pointer card card-compact bg-base-100 shadow-xl sm:card-normal max-w-xs transition-all duration-300 md:hover:scale-105 max-h-[420px] min-h-[420px]">
             <div className="card-body p-3">
-               <figure className="w-[80%] mx-auto">
+               <figure className="mx-auto">
                   <Image
                      src={img ? img : DefaultImg}
-                     width={250}
-                     height={240}
+                     width={290}
+                     height={215}
                      layout="intrinsic"
+                     className="object-cover"
                   />
                </figure>
                <h2 className="card-title text-xl font-medium">{title}</h2>

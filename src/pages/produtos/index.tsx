@@ -45,7 +45,7 @@ function Products({ categories }: CategoriesProps) {
                                              img={r.image_url}
                                              title={r.name}
                                              description={r.description}
-                                             id={res.id}
+                                             id={r.id}
                                           />
                                        </div>
                                     )

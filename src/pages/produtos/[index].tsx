@@ -1,16 +1,16 @@
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { GetServerSidePropsContext } from 'next'
 import Image from 'next/image'
-import Banner from '../../components/Banner'
-import { useCart } from '../../hooks/useCart'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
+import DefaultImg from '../../assets/images/default.png'
+import Banner from '../../components/Banner'
+import ProductCard from '../../components/ProductCard'
+import { useCart } from '../../hooks/useCart'
 import { setupAPIClient } from '../../services/api'
 import { ICategories2, IProduct } from '../../types/types'
-import DefaultImg from '../../assets/images/default.png'
-import { GetServerSidePropsContext } from 'next'
-import ProductCard from '../../components/ProductCard'
 import { FirstUpper } from '../../utils/masks'
-import { toast } from 'react-toastify'
 
 interface ProductsProps {
    product: IProduct
@@ -69,8 +69,8 @@ function Produtos({ product, category }: ProductsProps) {
       <div>
          <Banner title="tubos" />
          <div className="my-16 px-4 max-w-7xl mx-auto">
-            <div className="card flex-col-reverse md:flex-row max-w-5xl mx-auto">
-               <div className="card-body justify-center items-center">
+            <div className="card flex-col-reverse md:flex-row max-w-5xl mx-auto rounded-none">
+               <div className="card-body justify-center items-center bg-gray-50">
                   <Image
                      src={
                         product && product.media[0]
@@ -79,8 +79,9 @@ function Produtos({ product, category }: ProductsProps) {
                      }
                      width={550}
                      height={550}
-                     layout="fixed"
                      quality={100}
+                     layout="intrinsic"
+                     className="object-cover"
                   />
                </div>
                <div className="card-body md:max-w-md border gap-10 justify-between">
@@ -109,11 +110,14 @@ function Produtos({ product, category }: ProductsProps) {
                      </h1>
                   </div>
 
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-wrap w-full gap-3">
                      {product.select &&
                         product.select.map((s) => {
                            return (
-                              <div key={s.title}>
+                              <div
+                                 className="flex flex-col gap-3"
+                                 key={s.title}
+                              >
                                  <p>{s.title && FirstUpper(s.title)}</p>
                                  <select
                                     defaultValue={3}
@@ -133,26 +137,25 @@ function Produtos({ product, category }: ProductsProps) {
                                     <option value={'default'}>
                                        Selecione...
                                     </option>
-                                    {s.options.length > 0 &&
-                                       s.options.map((op) => {
-                                          return (
-                                             <option
-                                                key={op}
-                                                value={
-                                                   op && op.replace(/["]/g, '')
-                                                }
-                                             >
-                                                {op && op.replace(/["]/g, '')}
-                                             </option>
-                                          )
-                                       })}
+                                    {s.options.map((op) => {
+                                       return (
+                                          <option
+                                             key={op}
+                                             value={
+                                                op && op.replace(/["]/g, '')
+                                             }
+                                          >
+                                             {op && op.replace(/["]/g, '')}
+                                          </option>
+                                       )
+                                    })}
                                  </select>
                               </div>
                            )
                         })}
                      <div className="flex flex-col gap-3 w-auto">
                         <p>Quantidade</p>
-                        <div className="flex justify-between items-center border-accent border rounded-md min-h-12 max-h-12 px-2 w-48">
+                        <div className="flex justify-between items-center border-accent border rounded-md min-h-16 max-h-12 px-2 w-48">
                            <button
                               onClick={() =>
                                  setAmount(() => (amount > 1 ? amount - 1 : 1))

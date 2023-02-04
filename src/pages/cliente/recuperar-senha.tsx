@@ -1,10 +1,10 @@
-import { Input } from '../../components/InputElement'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import * as yup from 'yup'
-import Link from 'next/link'
 import axios from 'axios'
+import Link from 'next/link'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import * as yup from 'yup'
+import { Input } from '../../components/InputElement'
 
 type ForgoutFormData = {
    email: string
@@ -39,10 +39,10 @@ function RecuperarSenha() {
 
    return (
       <div className="grid gap-3 pt-3">
-         <h1 className="text-[#201942]">
+         <h3>
             Esqueceu sua senha? Sem problemas. Apenas informe seu endereço de
             e-mail que enviaremos um link que permitirá definir uma nova senha.
-         </h1>
+         </h3>
          <form
             onSubmit={handleSubmit(handleForgoutPassword)}
             className="form-control gap-2 w-full"
@@ -54,11 +54,9 @@ function RecuperarSenha() {
                error={errors.email}
             />
 
-            <div className="flex flex-col items-center md:items-start w-full">
+            <div className="flex mb-4 w-full">
                <Link href={'/cliente/login'} passHref>
-                  <a className="text-xs  text-blue-600 link cursor-pointer">
-                     Ir para o login
-                  </a>
+                  <a className="text-xs link cursor-pointer">Ir para o login</a>
                </Link>
             </div>
 

@@ -1,6 +1,3 @@
-import Image from 'next/image'
-import LogoImg from '../../assets/images/logo.webp'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import {
    faCartShopping,
@@ -8,17 +5,20 @@ import {
    faRightFromBracket,
    faUser,
 } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import axios from 'axios'
+import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
-import { useRouter } from 'next/router'
-import { useCart } from '../../hooks/useCart'
-import { AuthContext } from '../../hooks/AuthContext'
-import { UniqueName } from '../../utils/masks'
-import axios from 'axios'
-import { ICategories } from '../../types/types'
 import { toast } from 'react-toastify'
+import LogoImg from '../../assets/images/logo.webp'
+import { AuthContext } from '../../hooks/AuthContext'
+import { useCart } from '../../hooks/useCart'
+import { ICategories } from '../../types/types'
+import { UniqueName } from '../../utils/masks'
 
 const NavBar = () => {
    const router = useRouter()
@@ -109,7 +109,7 @@ const NavBar = () => {
                   </div>
                   <div className="navbar-end flex">
                      <Link href={'/carrinho'}>
-                        <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success text-base-100">
+                        <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success hover:bg-[#008C4F] text-base-100">
                            <FontAwesomeIcon
                               icon={faCartShopping}
                               className="w-4 h-4 relative"
@@ -125,7 +125,7 @@ const NavBar = () => {
                            ) : null}
                         </button>
                      </Link>
-                     <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-blue-400 text-base-100">
+                     <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-blue-400 hover:bg-blue-500 text-base-100">
                         <FontAwesomeIcon
                            icon={faFacebook}
                            className="w-4 h-4"
@@ -143,7 +143,7 @@ const NavBar = () => {
                      {user ? (
                         <div className="hidden sm:inline-block dropdown dropdown-end">
                            <label tabIndex={0}>
-                              <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success text-base-100">
+                              <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success hover:bg-[#008C4F] text-base-100">
                                  <FontAwesomeIcon
                                     icon={faCircleUser}
                                     className="w-4 h-4"
@@ -170,7 +170,7 @@ const NavBar = () => {
                         </div>
                      ) : (
                         <Link href={'/cliente/login'}>
-                           <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success text-base-100">
+                           <button className="active:scale-95 w-8 h-8 md:h-14 md:w-14 bg-success hover:bg-[#008C4F] text-base-100">
                               <FontAwesomeIcon
                                  icon={faUser}
                                  className="w-4 h-4 relative"

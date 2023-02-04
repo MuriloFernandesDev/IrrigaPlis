@@ -1,11 +1,10 @@
-import type { GetServerSidePropsContext } from 'next'
-import CircleImg1 from '../assets/images/circleImg1.webp'
-import CircleDetails from '../components/CircleDetails'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBuilding } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import type { GetServerSidePropsContext } from 'next'
+import DefaultImg from '../assets/images/default.png'
+import CircleDetails from '../components/CircleDetails'
 import { setupAPIClient } from '../services/api'
 import { ICategories } from '../types/types'
-import DefaultImg from '../assets/images/default.png'
 
 interface CategoriaProps {
    categories: ICategories[]
@@ -36,7 +35,7 @@ const Home = ({ categories }: CategoriaProps) => {
             <div className="w-36 h-[3px] bg-error" />
          </div>
 
-         <div className="flex flex-wrap w-full max-w-7xl my-10 mx-auto justify-around">
+         <div className="grid grid-cols-3 md:grid-cols-6 w-full max-w-7xl my-10 mx-auto justify-around">
             {categories &&
                categories.length > 0 &&
                categories.map((categorie) => {
