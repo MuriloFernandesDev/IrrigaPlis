@@ -9,7 +9,7 @@ interface CircleProps {
 const CircleDetails = ({ image, title, url }: CircleProps) => {
    return (
       <Link href={url ? `/produtos/${url}` : '/'}>
-         <div className="flex flex-col justify-center items-center transition-all hover:scale-105 duration-200 cursor-pointer">
+         <div className="flex gap-2 flex-col justify-start items-center transition-all hover:scale-105 duration-200 cursor-pointer">
             <Image
                src={image}
                width={160}
@@ -17,7 +17,7 @@ const CircleDetails = ({ image, title, url }: CircleProps) => {
                className="rounded-full"
             />
             <p className="text-base font-bold text-center text-primary">
-               {title}
+               {title ?? 'Sem título'}
             </p>
          </div>
       </Link>

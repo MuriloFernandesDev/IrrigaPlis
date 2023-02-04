@@ -1,20 +1,22 @@
-import '../styles/globals.css'
 import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
+import NextNProgress from 'nextjs-progressbar'
+import React from 'react'
 import { Theme } from 'react-daisyui'
-import { CartProvider } from '../hooks/useCart'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import NavBar from '../components/NavBar'
-import Footer from '../components/Footer'
-import { useRouter } from 'next/router'
-import React from 'react'
-import { AuthProvider } from '../hooks/AuthContext'
 import AuthComponent from '../components/AuthComponent'
+import Footer from '../components/Footer'
+import NavBar from '../components/NavBar'
+import { AuthProvider } from '../hooks/AuthContext'
+import { CartProvider } from '../hooks/useCart'
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
    const router = useRouter()
    return (
       <AuthProvider>
+         <NextNProgress />
          <Theme dataTheme="light">
             <CartProvider>
                <ToastContainer />

@@ -17,8 +17,10 @@
       "cookies-next": "^2.1.1",
       "daisyui": "^2.33.0",
       "next": "latest",
+      "nextjs-progressbar": "^0.0.16",
       "nookies": "^2.5.2",
       "react": "18.2.0",
+      "react-accessible-accordion": "^5.0.0",
       "react-daisyui": "^2.3.2",
       "react-dom": "18.2.0",
       "react-hook-form": "^7.36.0",
@@ -26,7 +28,6 @@
       "react-toastify": "^9.0.8",
       "sass": "^1.55.0",
       "superagent": "^8.0.9",
-      "react-accessible-accordion": "^5.0.0",
       "yup": "^0.32.11"
    },
    "devDependencies": {

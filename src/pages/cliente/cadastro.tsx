@@ -1,14 +1,13 @@
-import Link from 'next/link'
-import { Input } from '../../components/InputElement'
-import * as yup from 'yup'
-import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { maskCpfInput } from '../../utils/masks'
 import axios, { AxiosError } from 'axios'
+import Link from 'next/link'
 import { useContext } from 'react'
-import { AuthContext } from '../../hooks/AuthContext'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import Router from 'next/router'
+import * as yup from 'yup'
+import { Input } from '../../components/InputElement'
+import { AuthContext } from '../../hooks/AuthContext'
+import { maskCpfInput } from '../../utils/masks'
 
 type SignInFormData = {
    email: string
@@ -143,14 +142,14 @@ function Registro() {
                   label="Confirmação de senha"
                   error={errors.confirm_password}
                />
-               <div className="flex flex-col items-center md:items-start w-full">
+               <div className="flex justify-between w-full mb-4">
                   <Link href={'/cliente/recuperar-senha'} passHref>
-                     <a className="text-xs  text-blue-600 link cursor-pointer">
+                     <a className="text-xs link cursor-pointer">
                         Esqueceu sua senha?
                      </a>
                   </Link>
                   <Link href={'/cliente/login'} passHref>
-                     <a className="text-xs  text-blue-600 link cursor-pointer">
+                     <a className="text-xs link cursor-pointer">
                         Ir para o login
                      </a>
                   </Link>
