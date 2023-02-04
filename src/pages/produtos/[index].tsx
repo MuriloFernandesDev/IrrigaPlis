@@ -111,7 +111,8 @@ function Produtos({ product, category }: ProductsProps) {
                   </div>
 
                   <div className="flex flex-wrap w-full gap-3">
-                     {product.select &&
+                     {product &&
+                        product.select &&
                         product.select.map((s) => {
                            return (
                               <div
