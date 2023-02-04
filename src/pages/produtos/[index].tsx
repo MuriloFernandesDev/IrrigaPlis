@@ -108,32 +108,33 @@ function Produtos({ product, category }: ProductsProps) {
                         {product && product.name}
                      </h1>
                   </div>
-                  <div className="flex gap-3 w-full">
-                     <div className="flex flex-col gap-3">
-                        {product.select &&
-                           product.select.map((s) => {
-                              return (
-                                 <div key={s.title}>
-                                    <p>{s.title && FirstUpper(s.title)}</p>
-                                    <select
-                                       defaultValue={3}
-                                       className="select min-h-16 max-w-md bg-transparent select-accent"
-                                       defaultChecked
-                                       onChange={(e) =>
-                                          e.target.value !== 'default'
-                                             ? handleAddOptions(
-                                                  s.title,
-                                                  e.target.value
-                                               )
-                                             : toast.warning(
-                                                  'Selecione uma opção de produto'
-                                               )
-                                       }
-                                    >
-                                       <option value={'default'}>
-                                          Selecione...
-                                       </option>
-                                       {s.options.map((op) => {
+
+                  <div className="flex flex-col gap-3">
+                     {product.select &&
+                        product.select.map((s) => {
+                           return (
+                              <div key={s.title}>
+                                 <p>{s.title && FirstUpper(s.title)}</p>
+                                 <select
+                                    defaultValue={3}
+                                    className="select min-h-16 max-w-md bg-transparent select-accent"
+                                    defaultChecked
+                                    onChange={(e) =>
+                                       e.target.value !== 'default'
+                                          ? handleAddOptions(
+                                               s.title,
+                                               e.target.value
+                                            )
+                                          : toast.warning(
+                                               'Selecione uma opção de produto'
+                                            )
+                                    }
+                                 >
+                                    <option value={'default'}>
+                                       Selecione...
+                                    </option>
+                                    {s.options.length > 0 &&
+                                       s.options.map((op) => {
                                           return (
                                              <option
                                                 key={op}
@@ -145,14 +146,13 @@ function Produtos({ product, category }: ProductsProps) {
                                              </option>
                                           )
                                        })}
-                                    </select>
-                                 </div>
-                              )
-                           })}
-                     </div>
-                     <div className="flex flex-col gap-3">
+                                 </select>
+                              </div>
+                           )
+                        })}
+                     <div className="flex flex-col gap-3 w-auto">
                         <p>Quantidade</p>
-                        <div className="flex justify-between items-center border-accent border rounded-md px-2 min-h-16 max-h-16">
+                        <div className="flex justify-between items-center border-accent border rounded-md min-h-12 max-h-12 px-2 w-48">
                            <button
                               onClick={() =>
                                  setAmount(() => (amount > 1 ? amount - 1 : 1))

@@ -9,23 +9,59 @@ import {
    faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { useRouter } from 'next/router'
 import { useCart } from '../../hooks/useCart'
 import { AuthContext } from '../../hooks/AuthContext'
 import { UniqueName } from '../../utils/masks'
+import axios from 'axios'
+import { ICategories } from '../../types/types'
+import { toast } from 'react-toastify'
 
 const NavBar = () => {
    const router = useRouter()
    const [openDrawer, setOpenDrawer] = useState(false)
    const { cartSize } = useCart()
    const { user, signOut } = useContext(AuthContext)
+   const [categories, setCategories] = useState<ICategories[] | null>(null)
+   const [categorieSearch, setCategorieSearch] = useState<string | null>(null)
+   const [stringSearch, setStringSearch] = useState<string | null>(null)
+   const [loading, setLoading] = useState(true)
+
+   async function getCategories() {
+      try {
+         const { data } = await axios.get('/api/categories')
+
+         setCategories(data.data)
+      } catch (error) {
+         getCategories()
+      } finally {
+         setLoading(false)
+      }
+   }
+
+   function handleSearch() {
+      if (stringSearch && categorieSearch) {
+         const busca = {
+            category_id: categorieSearch,
+            search: stringSearch,
+         }
+         router.push(`/busca/${JSON.stringify(busca)}`)
+      } else {
+         toast.warning('Preencha todos os campos')
+      }
+   }
+
+   useEffect(() => {
+      getCategories()
+   }, [])
 
    const toggleDrawer = () => {
       setOpenDrawer((prevState) => !prevState)
    }
+
    return (
       <>
          <div className="fixed z-50 w-full">
@@ -175,25 +211,44 @@ const NavBar = () => {
                      </span>
                   </div>
                   <select
-                     defaultValue={3}
+                     defaultValue={'default'}
                      className="select max-w-md bg-transparent select-accent"
+                     onChange={(e) =>
+                        e.target.value !== 'default'
+                           ? setCategorieSearch(e.target.value)
+                           : setCategorieSearch(null)
+                     }
                   >
-                     <option value={1} disabled>
-                        Categoria
-                     </option>
-                     <option value={2}>Irrigação</option>
-                     <option value={3}>Irrigação</option>
-                     <option value={4}>Irrigação</option>
-                     <option value={5}>Irrigação</option>
-                     <option value={6}>Irrigação</option>
+                     <option value={'default'}>Selecione...</option>
+
+                     {loading ? (
+                        <option value={'loading'}>
+                           Buscando categorias...
+                        </option>
+                     ) : (
+                        categories &&
+                        categories.map((categorie) => {
+                           return (
+                              <option key={categorie.id} value={categorie.id}>
+                                 {categorie.name}
+                              </option>
+                           )
+                        })
+                     )}
                   </select>
 
                   <input
                      type="text"
                      placeholder="Digite aqui"
                      className="w-full input bg-transparent input-accent"
+                     onChange={(e) => setStringSearch(e.target.value)}
                   />
-                  <button className="btn btn-success text-white">Buscar</button>
+                  <button
+                     onClick={handleSearch}
+                     className="btn btn-success text-white"
+                  >
+                     Buscar
+                  </button>
                </div>
             </div>
          </div>
